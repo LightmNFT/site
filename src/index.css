@@ -37,7 +37,7 @@
 
 .colorful-text {
   background-clip: text;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.01);
   background-image: linear-gradient(
     90deg,
     #ff0000,
