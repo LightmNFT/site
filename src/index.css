@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes huerotate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(60deg);
+  }
+  100% {
+    filter: hue-rotate(0deg);
+  }
+}
+
+.colorful-box {
+  border: 8px solid;
+  border-image: linear-gradient(
+      135deg,
+      #ff0000,
+      #ff7f00,
+      #ffff00,
+      #00ff00,
+      #0000ff,
+      #4b0082,
+      #9400d3
+    )
+    1;
+  clip-path: inset(0px round 1rem);
+  animation: huerotate 3s infinite ease-in-out;
+  filter: hue-rotate(60deg);
+}
+
+.colorful-text {
+  background-clip: text;
+  color: rgba(0, 0, 0, 0.5);
+  background-image: linear-gradient(
+    90deg,
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #00ff00,
+    #0000ff,
+    #4b0082,
+    #9400d3
+  );
+}
