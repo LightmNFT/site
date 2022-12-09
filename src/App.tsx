@@ -172,6 +172,7 @@ function App() {
   );
 
   const renderComposable = useCallback(async (illo: Zdog.Illustration) => {
+    const isMobile = window.screen.width <= 640;
     const containerHeight = (illo.element.height as number) / devicePixelRatio;
     const containerWidth = (illo.element.width as number) / devicePixelRatio;
 
@@ -199,26 +200,28 @@ function App() {
         stroke: 40,
         color,
         rotate: { z: -Zdog.TAU / 4, x: -Zdog.TAU / 120 },
-        translate: { y: startY },
+        translate: { y: isMobile ? endY : startY },
       });
 
-      let tick = 0;
-      const cycle = 90;
+      if (!isMobile) {
+        let tick = 0;
+        const cycle = 90;
 
-      const animate = () => {
-        const progress = tick / cycle;
-        const tween = Zdog.easeInOut(progress, 3);
+        const animate = () => {
+          const progress = tick / cycle;
+          const tween = Zdog.easeInOut(progress, 3);
 
-        semiRing.translate.y = startY + diffrence * tween;
+          semiRing.translate.y = startY + diffrence * tween;
 
-        tick++;
+          tick++;
 
-        if (semiRing.translate.y <= endY) {
-          requestAnimationFrame(animate);
-        }
-      };
+          if (semiRing.translate.y <= endY) {
+            requestAnimationFrame(animate);
+          }
+        };
 
-      animate();
+        animate();
+      }
     });
 
     illo.updateRenderGraph();
