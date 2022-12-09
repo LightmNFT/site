@@ -288,6 +288,7 @@ function App() {
           id="composable"
           title="Composable"
           description="NFT can combine"
+          color={themeColor}
           autoplay
           render3D={renderComposable}
         />
