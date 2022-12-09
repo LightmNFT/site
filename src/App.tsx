@@ -1,8 +1,11 @@
 import * as ZR from "zrender";
+import CanvasPainter from "zrender/lib/canvas/Painter";
 import Zdog from "zdog";
 import { useCallback, useEffect, useState } from "react";
 import Canva from "./components/Canvas";
 import { sleep } from "./utils";
+
+ZR.registerPainter("canvas", CanvasPainter);
 
 const TRANSPARENT = "rgba(0,0,0,0)";
 const WHITE = "white";
