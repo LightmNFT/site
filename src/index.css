@@ -28,6 +28,9 @@
     )
     1;
   clip-path: inset(0px round 1rem);
+}
+
+.animation-box {
   animation: huerotate 3s infinite ease-in-out;
   filter: hue-rotate(60deg);
 }
