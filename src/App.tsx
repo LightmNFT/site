@@ -232,14 +232,14 @@ function App() {
     <div className="p-4 dark:bg-black dark:text-white font-semibold flex flex-col items-center gap-4 w-full min-h-screen">
       <div className="self-start flex flex-wrap items-end gap-4">
         <div className="flex items-center">
-          <picture className="inline w-24">
+          <picture className="inline md:w-24 sm:w-16 w-12">
             <source
               srcSet="LightmDark_logo.svg"
               media="(prefers-color-scheme: dark)"
             />
             <img src="Lightm_logo.svg" />
           </picture>
-          <h1 className="text-8xl">Lightm</h1>
+          <h1 className="md:text-8xl sm:text-6xl text-4xl">Lightm</h1>
         </div>
         <span className="text-sm">
           Show respect to{" "}
