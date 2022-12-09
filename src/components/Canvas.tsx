@@ -73,6 +73,7 @@ export default function Canvas({
       dragRotate: true,
     });
 
+    canvas.style.cursor = "move";
     canvas.style.width = `100%`;
     canvas.style.height = `100%`;
 
