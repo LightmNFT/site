@@ -1,16 +1,29 @@
 import { motion, useMotionValue, MotionProps } from "framer-motion";
 import { useState } from "react";
 import Frame, { FIXED_FRAME_SIDE_LEN } from "./components/Frame";
+import { getRandomPolygon } from "./utils";
 
-const SIDE_LEN = 224;
 const RADIUS = 120;
 const STROKE_WIDTH = 16;
 
-const RX = SIDE_LEN / 5;
-const TRIANGLE_SIDE_LEN = (2 / 3 ** (1 / 2)) * SIDE_LEN;
-
 export default function NestableFrame() {
   const [flag, setFlag] = useState(0);
+
+  const polygonSidesRange = { min: 3, max: 8 };
+  const polygonRadiusRange = {
+    min: (RADIUS * (3 ** 1 / 2)) / 2,
+    max: RADIUS * 1.2,
+  };
+  const circlePoint = [FIXED_FRAME_SIDE_LEN / 2, FIXED_FRAME_SIDE_LEN / 3];
+  const leftPoint = {
+    x: FIXED_FRAME_SIDE_LEN / 3,
+    y: FIXED_FRAME_SIDE_LEN / 2,
+  };
+  const rightPoint = {
+    x: (FIXED_FRAME_SIDE_LEN / 3) * 2,
+    y: FIXED_FRAME_SIDE_LEN / 2,
+  };
+  const translateY = (FIXED_FRAME_SIDE_LEN * 2) / 3 - FIXED_FRAME_SIDE_LEN / 2;
 
   const draw: MotionProps["variants"] = {
     hidden: (action: string) => {
@@ -78,7 +91,7 @@ export default function NestableFrame() {
             opacity: 1,
             scale: 0.8,
             fill: "#fff",
-            y: 256,
+            y: translateY,
             transition: {
               opacity: { delay, duration: 0.5 },
               y: {
@@ -105,18 +118,6 @@ export default function NestableFrame() {
       }
     },
   };
-  const triangleStartPoint = [
-    720 - TRIANGLE_SIDE_LEN / 2,
-    FIXED_FRAME_SIDE_LEN / 2 - SIDE_LEN / 2,
-  ];
-  const circlePoint = [FIXED_FRAME_SIDE_LEN / 2, 384];
-  const rectPoint = [
-    360 - SIDE_LEN / 2,
-    FIXED_FRAME_SIDE_LEN / 2 - SIDE_LEN / 2,
-  ];
-
-  const rectX = useMotionValue(rectPoint[0]);
-  const rectY = useMotionValue(rectPoint[1]);
 
   return (
     <Frame
@@ -136,19 +137,24 @@ export default function NestableFrame() {
         fill="none"
         custom="circle"
       />
-      <motion.rect
-        width={SIDE_LEN}
-        height={SIDE_LEN}
-        x={rectX}
-        y={rectY}
-        rx={RX}
+      <motion.polygon
+        points={getRandomPolygon({
+          sideLen: FIXED_FRAME_SIDE_LEN,
+          origin: leftPoint,
+          sides: polygonSidesRange,
+          r: polygonRadiusRange,
+        })}
+        strokeLinejoin="round"
         strokeWidth={STROKE_WIDTH}
         variants={draw}
       />
       <motion.polygon
-        points={`${triangleStartPoint[0]},${triangleStartPoint[1]} 720,652 ${
-          triangleStartPoint[0] + TRIANGLE_SIDE_LEN
-        },${triangleStartPoint[1]}`}
+        points={getRandomPolygon({
+          sideLen: FIXED_FRAME_SIDE_LEN,
+          origin: rightPoint,
+          sides: polygonSidesRange,
+          r: polygonRadiusRange,
+        })}
         strokeLinejoin="round"
         strokeWidth={STROKE_WIDTH}
         variants={draw}
@@ -156,8 +162,8 @@ export default function NestableFrame() {
       <motion.line
         x1={circlePoint[0]}
         y1={circlePoint[1]}
-        x2={rectX.get() + SIDE_LEN / 2}
-        y2={rectY.get() + SIDE_LEN / 2 + 256}
+        x2={leftPoint.x}
+        y2={leftPoint.y + translateY}
         strokeWidth={STROKE_WIDTH}
         variants={draw}
         custom="line"
@@ -165,8 +171,8 @@ export default function NestableFrame() {
       <motion.line
         x1={circlePoint[0]}
         y1={circlePoint[1]}
-        x2={rectPoint[0] + (TRIANGLE_SIDE_LEN * 0.8) / 2 + 360}
-        y2={rectPoint[1] + (TRIANGLE_SIDE_LEN * 0.8) / 2 + 256}
+        x2={rightPoint.x}
+        y2={rightPoint.y + translateY}
         strokeWidth={STROKE_WIDTH}
         variants={draw}
         custom="line"
