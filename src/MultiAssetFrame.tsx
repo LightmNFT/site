@@ -15,12 +15,12 @@ function getRandomPolygon() {
   let points = "";
   for (let i = 0; i < sides; i++) {
     const angle = (i / sides) * 2 * Math.PI;
-    const x = cx + r * Math.cos(angle);
-    const y = cy + r * Math.sin(angle);
+    const x = cx + r * Math.sin(angle);
+    const y = cy - r * Math.cos(angle);
     points += `${x},${y} `;
   }
 
-  return points;
+  return points.trim();
 }
 
 export default function MultiAssetFrame() {
@@ -59,7 +59,7 @@ export default function MultiAssetFrame() {
           },
         });
 
-        await sleep(2000);
+        await sleep(1200);
       }
     })();
   }, []);
