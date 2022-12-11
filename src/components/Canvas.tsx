@@ -1,6 +1,7 @@
 import * as ZR from "zrender";
 import Zdog from "zdog";
 import { useCallback, useEffect, useRef } from "react";
+import Refresh from "./Refresh";
 
 interface ICanvas {
   id: string;
@@ -14,21 +15,6 @@ interface ICanvas {
   render?: (stage: ZR.ZRenderType) => void;
   render3D?: (illo: Zdog.Illustration) => void;
 }
-
-const RefreshIcon = ({ color }: { color?: string }) => (
-  <svg
-    viewBox="0 0 1024 1024"
-    version="1.1"
-    width="48"
-    height="48"
-    fill={color || "auto"}
-  >
-    <path
-      d="M832 512a32 32 0 0 0-32 32c0 158.784-129.216 288-288 288s-288-129.216-288-288 129.216-288 288-288c66.208 0 129.536 22.752 180.608 64H608a32 32 0 0 0 0 64h160a32 32 0 0 0 32-32V192a32 32 0 0 0-64 0v80.96A350.464 350.464 0 0 0 512 192C317.92 192 160 349.92 160 544s157.92 352 352 352 352-157.92 352-352a32 32 0 0 0-32-32"
-      p-id="1361"
-    ></path>
-  </svg>
-);
 
 export default function Canvas({
   id,
@@ -59,8 +45,8 @@ export default function Canvas({
   const init3D = useCallback(() => {
     const container = domRef.current!;
     const canvas = document.createElement("canvas");
-    canvas.width = container.clientWidth * 2 * devicePixelRatio;
-    canvas.height = container.clientHeight * 2 * devicePixelRatio;
+    canvas.width = container.clientWidth * 2;
+    canvas.height = container.clientHeight * 2;
 
     if (dom3DRef.current) {
       dom3DRef.current.remove();
@@ -86,8 +72,6 @@ export default function Canvas({
     }
 
     animate();
-
-    return () => {};
   }, []);
 
   const reRender = useCallback(() => {
@@ -132,11 +116,8 @@ export default function Canvas({
           <span className="text-2xl">{title}</span>
           <span className="text-md">{description}</span>
         </div>
-        <span
-          className="cursor-pointer hover:scale-110 transition-transform"
-          onClick={is3D ? reRender3D : reRender}
-        >
-          <RefreshIcon color={color} />
+        <span className="cursor-pointer hover:scale-110 transition-transform">
+          <Refresh color={color} onClick={is3D ? reRender3D : reRender} />
         </span>
       </div>
     </div>

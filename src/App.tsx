@@ -4,12 +4,14 @@ import Zdog from "zdog";
 import { useCallback, useEffect, useState } from "react";
 import Canva from "./components/Canvas";
 import { sleep } from "./utils";
+import NestableFrame from "./NestableFrame";
+import MultiAssetFrame from "./MultiAssetFrame";
 
 ZR.registerPainter("canvas", CanvasPainter);
 
 const TRANSPARENT = "rgba(0,0,0,0)";
-const WHITE = "white";
-const BLACK = "black";
+const WHITE = "rgba(255,255,255,1)";
+const BLACK = "rgba(0,0,0,1)";
 
 const RMRK_THEME_COLOR = "#ca2a77";
 const EIP_2535_THEME_COLOR = "#53e6f8";
@@ -41,136 +43,6 @@ function App() {
     query.addEventListener("change", handleColorSchemeChange);
   }, []);
 
-  const renderNestable = useCallback(
-    async (stage: ZR.ZRenderType) => {
-      if (stage) {
-        const stageWidth = stage.getWidth();
-        const stageHeight = stage.getHeight();
-        const radius = Math.min(stageWidth, stageHeight) / 12;
-        const sideLen = (radius * 224) / 128;
-
-        const NFTA = new ZR.Circle({
-          shape: {
-            cx: stageWidth / 3,
-            cy: stageHeight / 2,
-            r: radius,
-          },
-          style: { fill: TRANSPARENT },
-          silent: true,
-        });
-
-        const NFTB = new ZR.Rect({
-          shape: {
-            x: (stageWidth * 2) / 3 - sideLen / 2,
-            y: stageHeight / 2 - sideLen / 2,
-            width: sideLen,
-            height: sideLen,
-            r: 8,
-          },
-          style: { fill: TRANSPARENT },
-          silent: true,
-        });
-
-        stage.add(NFTA);
-        stage.add(NFTB);
-
-        NFTA.animate("style").when(500, { fill: themeColor }).start();
-        NFTA.animate("shape")
-          .delay(500)
-          .when(500, {
-            cx: stageWidth / 2,
-            cy: stageHeight / 3,
-          })
-          .start();
-
-        NFTB.animate("style")
-          .when(500, {
-            fill: themeColor,
-          })
-          .start();
-        NFTB.animate("shape")
-          .delay(500)
-          .when(500, {
-            x: stageWidth / 2 - sideLen / 2,
-            y: (stageHeight * 2) / 3 - sideLen / 2,
-          })
-          .done(drawLine)
-          .start();
-
-        function drawLine() {
-          const NFTARect = NFTA.getBoundingRect();
-          const NFTBRect = NFTB.getBoundingRect();
-          const startPoint = { x: NFTBRect.x + sideLen / 2, y: NFTBRect.y };
-          const finalPoint = {
-            x: NFTARect.x + radius,
-            y: NFTARect.y + radius * 2,
-          };
-
-          const line = new ZR.Line({
-            shape: {
-              x1: startPoint.x,
-              y1: startPoint.y,
-              x2: startPoint.x,
-              y2: startPoint.y,
-            },
-            style: { stroke: themeColor, fill: themeColor, lineWidth: 4 },
-            silent: true,
-          });
-
-          stage.add(line);
-
-          line
-            .animate("shape")
-            .when(800, {
-              x1: startPoint.x,
-              y1: startPoint.y,
-              x2: finalPoint.x,
-              y2: finalPoint.y,
-            })
-            .start();
-        }
-      }
-    },
-    [themeColor]
-  );
-
-  const renderMultiAsset = useCallback(
-    async (stage: ZR.ZRenderType) => {
-      if (stage) {
-        const stageWidth = stage.getWidth() / 2;
-        const stageHeight = stage.getHeight() / 2;
-        const radius = Math.min(stageWidth, stageHeight) / 12;
-        const sideLen = (radius * 224) / 128;
-
-        const NFTC = new ZR.Isogon({
-          shape: {
-            n: 6,
-            r: sideLen * 2,
-            x: stageWidth,
-            y: stageHeight,
-          },
-          style: {
-            fill: TRANSPARENT,
-          },
-          silent: true,
-        });
-
-        stage.add(NFTC);
-
-        NFTC.animate("style").when(500, { fill: themeColor }).start();
-        NFTC.animate("shape")
-          .delay(500)
-          .when(500, { n: 8 })
-          .when(1000, { n: 8 })
-          .when(1500, { n: 4 })
-          .when(2000, { n: 4 })
-          .when(2500, { n: 6 })
-          .start();
-      }
-    },
-    [themeColor]
-  );
-
   const renderComposable = useCallback(async (illo: Zdog.Illustration) => {
     const isMobile = window.screen.width <= 640;
     const containerHeight = (illo.element.height as number) / devicePixelRatio;
@@ -186,6 +58,8 @@ function App() {
       "#ff0000",
     ];
 
+    const strokeWidth = containerWidth / 32;
+
     const startY = -containerHeight - 20;
     const endY = containerHeight / 6;
     const diffrence = endY - startY;
@@ -195,33 +69,32 @@ function App() {
 
       const semiRing = new Zdog.Ellipse({
         addTo: illo,
-        diameter: containerWidth / 3 + i * 2 * 43,
+        diameter: containerWidth / 3 + i * 2 * (strokeWidth + 2),
         quarters: 2,
-        stroke: 40,
+        stroke: strokeWidth,
         color,
         rotate: { z: -Zdog.TAU / 4, x: -Zdog.TAU / 120 },
         translate: { y: isMobile ? endY : startY },
       });
 
-      if (!isMobile) {
-        let tick = 0;
-        const cycle = 90;
+      let tick = 0;
+      const cycle = 90;
 
-        const animate = () => {
-          const progress = tick / cycle;
-          const tween = Zdog.easeInOut(progress, 3);
+      const animate = () => {
+        const progress = tick / cycle;
+        const tween = Zdog.easeInOut(progress, 3);
 
-          semiRing.translate.y = startY + diffrence * tween;
+        semiRing.translate.y = startY + diffrence * tween;
 
-          tick++;
+        tick++;
 
-          if (semiRing.translate.y <= endY) {
-            requestAnimationFrame(animate);
-          }
-        };
+        if (semiRing.translate.y <= endY) {
+          illo.updateRenderGraph();
+          requestAnimationFrame(animate);
+        }
+      };
 
-        animate();
-      }
+      animate();
     });
 
     illo.updateRenderGraph();
@@ -268,22 +141,8 @@ function App() {
         <p>©{new Date().getFullYear()} LightM Labs.</p>
       </p>
       <div className="flex-auto grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 justify-items-center items-center gap-4 w-full">
-        <Canva
-          id="nestable"
-          title="Nestable"
-          description="NFT can own NFT"
-          color={themeColor}
-          autoplay
-          render={renderNestable}
-        />
-        <Canva
-          id="multi-asset"
-          title="Multi Asset"
-          description="NFT can have multiple output"
-          color={themeColor}
-          autoplay
-          render={renderMultiAsset}
-        />
+        <NestableFrame />
+        <MultiAssetFrame />
         <Canva
           is3D
           className="colorful-box md:col-start-1 md:col-end-3 lg:col-auto"

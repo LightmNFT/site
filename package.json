@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "anime": "^0.1.2",
+    "framer-motion": "^7.6.19",
     "konva": "^8.3.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
