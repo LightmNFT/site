@@ -2,26 +2,9 @@ import { motion, useAnimationControls } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 
 import Frame, { FIXED_FRAME_SIDE_LEN } from "./components/Frame";
-import { random, sleep } from "./utils";
+import { getRandomPolygon, sleep } from "./utils";
 
 const STROKE_WIDTH = 16;
-
-function getRandomPolygon() {
-  const cx = FIXED_FRAME_SIDE_LEN / 2;
-  const cy = FIXED_FRAME_SIDE_LEN / 2;
-  const r = random(192, 480);
-  const sides = random(3, 16);
-
-  let points = "";
-  for (let i = 0; i < sides; i++) {
-    const angle = (i / sides) * 2 * Math.PI;
-    const x = cx + r * Math.sin(angle);
-    const y = cy - r * Math.cos(angle);
-    points += `${x},${y} `;
-  }
-
-  return points.trim();
-}
 
 export default function MultiAssetFrame() {
   const controls = useAnimationControls();
@@ -35,7 +18,7 @@ export default function MultiAssetFrame() {
         controls.set({
           fill: "#0000",
           stroke: "#fff",
-          points: getRandomPolygon(),
+          points: getRandomPolygon(FIXED_FRAME_SIDE_LEN),
         });
 
         controls.start({
