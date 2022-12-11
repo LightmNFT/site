@@ -22,6 +22,7 @@ export default function MultiAssetFrame() {
         });
 
         controls.start({
+          scale: [1, 1.25, 1.5, 1.25, 1],
           pathLength: [0, 0.2, 0.5, 0.8, 1],
           rotate: [0, 90, 180, 90, 0],
           transition: {
