@@ -6,17 +6,35 @@ export function random(min: number, max: number) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-export function getRandomPolygon(sideLen: number) {
-  const cx = sideLen / 2;
-  const cy = sideLen / 2;
-  const r = random(192, 480);
-  const sides = random(3, 16);
+interface IPolygonConfig {
+  sideLen: number;
+  origin?: {
+    x: number;
+    y: number;
+  };
+  r?: { min: number; max: number };
+  sides?: {
+    min: number;
+    max: number;
+  };
+}
+
+export function getRandomPolygon({
+  sideLen,
+  origin,
+  r,
+  sides,
+}: IPolygonConfig) {
+  const cx = origin ? origin.x : sideLen / 2;
+  const cy = origin ? origin.y : sideLen / 2;
+  const _r = r ? random(r.min, r.max) : random(192, 384);
+  const _sides = sides ? random(sides.min, sides.max) : random(3, 16);
 
   let points = "";
-  for (let i = 0; i < sides; i++) {
-    const angle = (i / sides) * 2 * Math.PI;
-    const x = cx + r * Math.sin(angle);
-    const y = cy - r * Math.cos(angle);
+  for (let i = 0; i < _sides; i++) {
+    const angle = (i / _sides) * 2 * Math.PI;
+    const x = cx + _r * Math.sin(angle);
+    const y = cy - _r * Math.cos(angle);
     points += `${x},${y} `;
   }
 

@@ -18,7 +18,7 @@ export default function MultiAssetFrame() {
         controls.set({
           fill: "#0000",
           stroke: "#fff",
-          points: getRandomPolygon(FIXED_FRAME_SIDE_LEN),
+          points: getRandomPolygon({ sideLen: FIXED_FRAME_SIDE_LEN }),
         });
 
         controls.start({
