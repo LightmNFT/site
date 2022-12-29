@@ -128,7 +128,7 @@ function App() {
   }, []);
 
   return (
-    <div className="p-4 dark:bg-black dark:text-white font-semibold flex flex-col items-center gap-4 w-full min-h-screen">
+    <div className="p-4 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black dark:bg-black dark:text-white font-semibold flex flex-col items-center gap-4 w-full min-h-screen">
       <div className="self-start flex flex-wrap items-end gap-4">
         <div className="flex items-center">
           <picture className="inline md:w-24 sm:w-16 w-12">

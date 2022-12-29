@@ -51,7 +51,7 @@ export default function Frame({
           textClassName ? ` ${textClassName}` : ""
         }`}
       >
-        <div className="text-white flex flex-col items-end cursor-default">
+        <div className="text-white selection:text-black selection:bg-white flex flex-col items-end cursor-default">
           <span className="text-2xl mix-blend-difference">{title}</span>
           <span className="text-md mix-blend-difference">{description}</span>
         </div>
