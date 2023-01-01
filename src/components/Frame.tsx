@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
+import { ReactNode } from "react";
 import Refresh from "./Refresh";
 
 export interface IFrame extends React.PropsWithChildren {
-  title: string;
-  description: string;
+  title: ReactNode;
+  description: ReactNode;
   fill: string;
   stroke: string;
   className?: string;
   textClassName?: string;
+  viewBox?: string;
   onRefresh?: () => void;
 }
 
@@ -21,6 +23,7 @@ export default function Frame({
   className,
   title,
   description,
+  viewBox = `0 0 ${FIXED_FRAME_SIDE_LEN} ${FIXED_FRAME_SIDE_LEN}`,
   onRefresh = () => {},
 }: IFrame) {
   return (
@@ -36,7 +39,7 @@ export default function Frame({
       <motion.svg
         width={FIXED_FRAME_SIDE_LEN}
         height={FIXED_FRAME_SIDE_LEN}
-        viewBox={`0 0 ${FIXED_FRAME_SIDE_LEN} ${FIXED_FRAME_SIDE_LEN}`}
+        viewBox={viewBox}
         className="w-full h-full object-contain mix-blend-difference"
         initial="hidden"
         animate="visible"
