@@ -4,13 +4,15 @@ import Canva from "./components/Canvas";
 import { sleep } from "./utils";
 import NestableFrame from "./NestableFrame";
 import MultiAssetFrame from "./MultiAssetFrame";
+import EconomicalFrame from "./EconomicalFrame";
+import UpgradableFrame from "./UpgradableFrame";
 
 const TRANSPARENT = "rgba(0,0,0,0)";
 const WHITE = "rgba(255,255,255,1)";
 const BLACK = "rgba(0,0,0,1)";
 
-const RMRK_THEME_COLOR = "#ca2a77";
-const EIP_2535_THEME_COLOR = "#53e6f8";
+export const RMRK_THEME_COLOR = "#ca2a77";
+export const EIP_2535_THEME_COLOR = "#53e6f8";
 
 const githubLink = "https://github.com/orgs/LightmNFT/repositories";
 const twitterLink = "https://twitter.com/LightmNFT";
@@ -185,6 +187,10 @@ function App() {
           autoplay
           render3D={renderComposable}
         />
+      </div>
+      <div className="flex-auto grid md:grid-cols-2 sm:grid-cols-1 justify-items-center items-center gap-4 w-full">
+        <EconomicalFrame />
+        <UpgradableFrame />
       </div>
     </div>
   );
