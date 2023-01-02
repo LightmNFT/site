@@ -16,6 +16,7 @@ export const EIP_2535_THEME_COLOR = "#53e6f8";
 
 const githubLink = "https://github.com/orgs/LightmNFT/repositories";
 const twitterLink = "https://twitter.com/LightmNFT";
+const mailLink = "mailto:contact@lightm.xyz";
 
 const githubSvg = (
   <svg
@@ -38,6 +39,18 @@ const twitterSvg = (
     viewBox="0 0 16 16"
   >
     <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
+  </svg>
+);
+
+const mailSvg = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    fill="currentColor"
+    viewBox="0 0 16 16"
+  >
+    <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
   </svg>
 );
 
@@ -171,6 +184,7 @@ function App() {
           <a href={twitterLink} target="_blank">
             {twitterSvg}
           </a>
+          <a href={mailLink}>{mailSvg}</a>
         </p>
       </p>
       <div className="flex-auto grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 justify-items-center items-center gap-4 w-full">
