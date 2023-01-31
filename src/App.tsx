@@ -18,6 +18,11 @@ const githubLink = "https://github.com/orgs/LightmNFT/repositories";
 const twitterLink = "https://twitter.com/LightmNFT";
 const mailLink = "mailto:contact@lightm.xyz";
 
+const planLink =
+  "https://docs.google.com/presentation/d/16Ut2nVxYzLKM8X8QB9MRvKUpq1mMI82_/edit?usp=sharing&ouid=100859893654062893603&rtpof=true&sd=true";
+const planLinkCN =
+  "https://docs.google.com/presentation/d/15mes-6h-H-fSf_4nFLh7_BsiBE9qfW0l/edit?usp=sharing&ouid=100859893654062893603&rtpof=true&sd=true";
+
 const githubSvg = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -176,6 +181,15 @@ function App() {
       </div>
       <p className="self-start text-xl pb-4">
         Next generation decentralized NFT platform.
+        <p>
+          Vision, and short-term plans:{" "}
+          <a className="underline underline-offset-4" href={planLink}>
+            EN
+          </a>{" "}
+          <a className="underline underline-offset-4" href={planLinkCN}>
+            CN
+          </a>
+        </p>
         <p>©{new Date().getFullYear()} LightM Labs.</p>
         <p className="flex gap-2">
           <a href={githubLink} target="_blank">
