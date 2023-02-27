@@ -56,7 +56,7 @@ export default function Frame({
       >
         <div className="text-white selection:text-black selection:bg-white flex flex-col items-end cursor-default">
           <span className="text-2xl mix-blend-difference">{title}</span>
-          <span className="text-md mix-blend-difference">{description}</span>
+          <span className="text-sm mix-blend-difference">{description}</span>
         </div>
         <span className="cursor-pointer">
           <Refresh color={"#fff"} onClick={onRefresh} />

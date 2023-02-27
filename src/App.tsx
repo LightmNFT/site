@@ -22,6 +22,9 @@ const planLink =
   "https://docs.google.com/presentation/d/16Ut2nVxYzLKM8X8QB9MRvKUpq1mMI82_/edit?usp=sharing&ouid=100859893654062893603&rtpof=true&sd=true";
 const planLinkCN =
   "https://docs.google.com/presentation/d/15mes-6h-H-fSf_4nFLh7_BsiBE9qfW0l/edit?usp=sharing&ouid=100859893654062893603&rtpof=true&sd=true";
+const docsLink =
+  "https://lightm.notion.site/Lightm-Introduction-Lightm-191dbf88db314e268abf75587867a036";
+const appLink = "https://app.lightm.xyz";
 
 const githubSvg = (
   <svg
@@ -56,6 +59,31 @@ const mailSvg = (
     viewBox="0 0 16 16"
   >
     <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
+  </svg>
+);
+
+const docsSvg = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    fill="currentColor"
+    viewBox="0 0 16 16"
+  >
+    <path d="M7 4.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm-.861 1.542 1.33.886 1.854-1.855a.25.25 0 0 1 .289-.047l1.888.974V7.5a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V7s1.54-1.274 1.639-1.208zM5 9a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z" />
+    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
+  </svg>
+);
+
+const arrowSvg = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    fill="currentColor"
+    viewBox="0 0 16 16"
+  >
+    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
   </svg>
 );
 
@@ -148,17 +176,17 @@ function App() {
   }, []);
 
   return (
-    <div className="p-4 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black dark:bg-black dark:text-white font-semibold flex flex-col items-center gap-4 w-full min-h-screen">
+    <div className="px-8 py-2 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black dark:bg-black dark:text-white font-semibold flex flex-col items-center gap-4 w-full min-h-screen">
       <div className="self-start flex flex-wrap items-end gap-4">
         <div className="flex items-center">
-          <picture className="inline md:w-24 sm:w-16 w-12">
+          <picture className="inline 2xl:w-32 md:w-28 w-16">
             <source
               srcSet="LightmDark_logo.svg"
               media="(prefers-color-scheme: dark)"
             />
             <img src="Lightm_logo.svg" />
           </picture>
-          <h1 className="md:text-8xl sm:text-6xl text-4xl">Lightm</h1>
+          <h1 className="2xl:text-9xl md:text-8xl text-6xl">Lightm</h1>
         </div>
         <span className="text-sm">
           Show respect to{" "}
@@ -178,47 +206,69 @@ function App() {
             EIP-2535
           </a>
         </span>
-      </div>
-      <p className="self-start text-xl pb-4">
-        Next generation decentralized NFT platform.
-        <p>
-          Vision, and short-term plans:{" "}
-          <a className="underline underline-offset-4" href={planLink}>
-            EN
-          </a>{" "}
-          <a className="underline underline-offset-4" href={planLinkCN}>
-            CN
-          </a>
+        <p className="text-2xl basis-full">
+          Next generation decentralized NFT platform.
+          <p>
+            Vision, and short-term plans:{" "}
+            <a
+              className="underline underline-offset-4"
+              href={planLink}
+              target="_blank"
+            >
+              EN
+            </a>{" "}
+            <a
+              className="underline underline-offset-4"
+              href={planLinkCN}
+              target="_blank"
+            >
+              CN
+            </a>
+          </p>
         </p>
-        <p>©{new Date().getFullYear()} LightM Labs.</p>
-        <p className="flex gap-2">
-          <a href={githubLink} target="_blank">
-            {githubSvg}
-          </a>
-          <a href={twitterLink} target="_blank">
-            {twitterSvg}
-          </a>
-          <a href={mailLink}>{mailSvg}</a>
-        </p>
-      </p>
-      <div className="flex-auto grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 justify-items-center items-center gap-4 w-full">
-        <NestableFrame />
-        <MultiAssetFrame />
-        <Canva
-          is3D
-          className="colorful-box md:col-start-1 md:col-end-3 lg:col-auto"
-          textClassName="colorful-text"
-          id="composable"
-          title="Composable"
-          description="NFT can combine"
-          color={themeColor}
-          autoplay
-          render3D={renderComposable}
-        />
       </div>
-      <div className="flex-auto grid md:grid-cols-2 sm:grid-cols-1 justify-items-center items-center gap-4 w-full">
-        <EconomicalFrame />
-        <UpgradableFrame />
+      <div className="self-start flex flex-wrap gap-2">
+        <div className="border-2 border-black dark:border-white rounded-xl text-lg p-1">
+          <p>©{new Date().getFullYear()} LightM Labs.</p>
+          <p className="flex gap-2">
+            <a href={githubLink} target="_blank">
+              {githubSvg}
+            </a>
+            <a href={twitterLink} target="_blank">
+              {twitterSvg}
+            </a>
+            <a href={mailLink}>{mailSvg}</a>
+          </p>
+        </div>
+        <a href={docsLink} target="_blank" className="link-button">
+          {docsSvg}
+          <span>Check docs</span>
+        </a>
+        <a href={appLink} target="_blank" className="link-button">
+          {arrowSvg}
+          <span>Launch App (Alpha Stage)</span>
+        </a>
+      </div>
+      <div className="container flex gap-4 2xl:gap-6 flex-wrap 2xl:flex-nowrap">
+        <div className="flex-auto grid md:grid-cols-2 sm:grid-cols-1 justify-items-center items-center gap-4 2xl:gap-6 w-full 2xl:w-[50%]">
+          <NestableFrame />
+          <MultiAssetFrame />
+          <EconomicalFrame />
+          <UpgradableFrame />
+        </div>
+        <div className="flex-auto w-full 2xl:w-[50%]">
+          <Canva
+            is3D
+            className="colorful-box md:col-start-1 md:col-end-3 lg:col-auto"
+            textClassName="colorful-text"
+            id="composable"
+            title="Composable"
+            description="NFT can combine"
+            color={themeColor}
+            autoplay
+            render3D={renderComposable}
+          />
+        </div>
       </div>
     </div>
   );

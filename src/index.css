@@ -2,6 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .background-white-in-black {
+    background-image: linear-gradient(
+      to right,
+      black,
+      black 45%,
+      white 45%,
+      white 55%,
+      black 55%,
+      black
+    );
+  }
+  .background-black-in-white {
+    background-image: linear-gradient(
+      to right,
+      white,
+      white 45%,
+      black 45%,
+      black 55%,
+      white 55%,
+      white
+    );
+  }
+}
+
+@layer components {
+  .link-button {
+    @apply flex items-center gap-2 text-xl rounded-xl background-white-in-black dark:background-black-in-white link-button-background text-white p-4;
+  }
+  .link-button > * {
+    @apply mix-blend-difference;
+  }
+  .link-button-background {
+    background-position-x: 100%;
+    background-size: 223% 100%;
+    transition: background-position 0.8s ease;
+  }
+  .link-button-background:hover {
+    background-position-x: 0%;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 94%;
+  }
+}
+
 @keyframes huerotate {
   0% {
     filter: hue-rotate(0deg);
