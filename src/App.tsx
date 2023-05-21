@@ -22,7 +22,7 @@ const mailLink = "mailto:contact@lightm.xyz";
 const planLink =
   "https://docs.google.com/presentation/d/16Ut2nVxYzLKM8X8QB9MRvKUpq1mMI82_/edit?usp=sharing&ouid=100859893654062893603&rtpof=true&sd=true";
 const planLinkCN =
-  "https://docs.google.com/presentation/d/15mes-6h-H-fSf_4nFLh7_BsiBE9qfW0l/edit?usp=sharing&ouid=100859893654062893603&rtpof=true&sd=true";
+  "https://lightm-intro-cn.netlify.app/";
 const docsLink =
   "https://lightm.notion.site/Lightm-Introduction-Lightm-191dbf88db314e268abf75587867a036";
 const appLink = "https://app.lightm.xyz";
