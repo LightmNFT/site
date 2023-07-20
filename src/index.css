@@ -29,7 +29,7 @@
 
 @layer components {
   .link-button {
-    @apply flex items-center gap-2 text-xl rounded-xl background-white-in-black dark:background-black-in-white link-button-background text-white p-4;
+    @apply flex items-center gap-2 text-xl rounded-xl max-md:rounded-md background-white-in-black dark:background-black-in-white link-button-background text-white p-4 max-md:p-2;
   }
   .link-button > * {
     @apply mix-blend-difference;

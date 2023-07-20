@@ -6,6 +6,7 @@ import NestableFrame from "./NestableFrame";
 import MultiAssetFrame from "./MultiAssetFrame";
 import EconomicalFrame from "./EconomicalFrame";
 import UpgradableFrame from "./UpgradableFrame";
+import ChickenFineBanner from "./components/ChickenFineBanner";
 
 const TRANSPARENT = "rgba(0,0,0,0)";
 const WHITE = "rgba(255,255,255,1)";
@@ -189,7 +190,8 @@ function App() {
   }, []);
 
   return (
-    <div className="px-8 py-2 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black dark:bg-black dark:text-white font-semibold flex flex-col items-center gap-4 w-full min-h-screen">
+    <div className="relative px-8 py-2 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black dark:bg-black dark:text-white font-semibold flex flex-col items-center gap-4 w-full min-h-screen">
+      <ChickenFineBanner />
       <div className="self-start flex flex-wrap items-end gap-4">
         <div className="flex items-center">
           <picture className="inline 2xl:w-32 md:w-28 w-16">
