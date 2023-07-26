@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const chickenFineLink = "https://chicken-fine-site.vercel.app/";
+const chickenFineLink = "https://chickenfine.art";
 
 export default function ChickenFineBanner() {
   const [close, setClose] = useState(false);
